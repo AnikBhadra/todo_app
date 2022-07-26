@@ -5,16 +5,24 @@ function Todo() {
     const [todos, setTodos] = useState(["anik", "bhadra"])
     const [task, setTask] = useState("")
 
-    function createTodo() {
+    function createTodo(event) {
+        event.preventDefault()
         setTodos(oldTodos => {
+            setTask('')
             return [...oldTodos, task]
         })
     }
+
+
     return (
         <div>
             <h1>todo</h1>
-            <input type="text" value={task} onChange={e => { setTask(e.target.value) }} />
-            <button onClick={createTodo} >create todo</button>
+
+            <form onSubmit={createTodo} >
+                <input type="text" value={task} onChange={e => { setTask(e.target.value) }} />
+                <button type='submit' >create todo</button>
+            </form>
+
 
             <ul>
                 {todos.map(todo => {
